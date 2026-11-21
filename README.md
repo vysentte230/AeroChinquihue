@@ -3,4 +3,4 @@ Integrantes del grupo:
 - Matías Riquelme
 - Jeremías Tapia
 - Vicente Vargas
-Jose Menares
+- Jose Menares
