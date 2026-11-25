@@ -8,7 +8,7 @@ class cliente:
     def getcantidadvuelos(self):
          return self.__cantidadvuelos
     def estadoemergencia(self):
-        return self.__estadoemergencia
+         return self.__estadoemergencia
 
 class asistente:
     def __init__(self, codigoempleado):
@@ -33,53 +33,40 @@ class gerente:
         return self.__codigoempleado
 
 class aerodromo:
-    def __init__(self,nombre,preciopasaje,precioKg):
-        self.nombre = nombre
-        self.preciopasaje = preciopasaje
-        self.preciokg = precioKg
+    def __init__(self, nombre, preciopasaje, precioporkg):
+        self.__nombre = nombre
+        self.__preciopasaje = preciopasaje
+        self.__precioporkg = precioporkg
+
     def getnombre(self):
         return self.__nombre
-    def getpreciopasaje(self):
+    def obtenerpreciopasaje(self):
         return self.__preciopasaje
-    def getprecioKg(self):
-        return self.__precioKg
+    def obtenerprecioencomienda(self):
+        return self.__precioporkg
 
-class vuelo:
-    def __init__(self,codigo,fecha,horario,estado,cargaActual):
-        self.codigo = codigo
-        self.fecha = fecha
-        self.horario = horario
-        self.estado = estado
-        self.cargaActual = cargaActual
-    def getcodigo(self):
-        return self.__codigo
-    def getfecha(self):
-        return self.__fecha
-    def gethorario(self):
-        return self.__horario
-    def getestado(self):
-        return self.__estado
-    def getcargaActual(self):
-        return self.__cargaActual
+class asiento:
+    def __init__(self, numero, ocupado= False):
+        self.__numero = numero
+        self.__ocupado = ocupado
 
-class avion:
-    def __init__(self,modelo,cantidadpasajeros,capacidadCarga):
-        self.modelo = modelo
-        self.cantidadpasajeros = cantidadpasajeros
-        self.capacidadCarga = capacidadCarga
-    def getmodelo(self):
-        return self.__modelo
-    def getcantidadpasajeros(self):
-        return self.__cantidadpasajeros
-    def getcapacidadCarga(self):
-        return self.__capacidadCarga
-
-class Asiento:
-    def __init__(self,numero,ocupado):
-        self.numero = numero
-        self.ocupado = ocupado
     def getnumero(self):
         return self.__numero
-    def getocupado(self):
-        return self.__ocupado
-    
+
+    def estadisponible(self):
+        return not self.__ocupado
+
+    def ocupar(self):
+        if self.__ocupado:
+            return False
+        self.__ocupado = True
+        return True
+
+    def desocupar(self):
+        self.__ocupado = False
+
+class avion:
+    def __init__(self, modelo, capacidadpasajeros, capacidadcarga, asientos=None):
+        self.__modelo = modelo
+        self.__capacidadpasajeros = capacidadpasajeros
+        self.__capacidadcarga = capacidadcarga
