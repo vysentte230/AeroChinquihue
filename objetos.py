@@ -8,6 +8,7 @@ class cliente:
     def getcantidadvuelos(self):
          return self.___cantidadvuelos
     def estadoemergencia(self):
+         return self.__estadoemergencia
 
 class asistente:
     def __init__(self, codigoempleado):
