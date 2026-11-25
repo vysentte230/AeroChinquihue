@@ -1,17 +1,3 @@
-class personaje:
-    def __init__(self, nombre, vida, fuerza_base, mana, defensa):
-        if vida < 0:
-            raise ValueError("La vida no puede ser negativa.")
-        self.__nombre = nombre
-        self.__vida = vida
-        self.__vida_maxima = vida
-        self.__fuerza_base = fuerza_base
-        self.__mana = mana
-        self.__defensa = defensa
-        self.__item = None
-
-    def getnombre(self):
-        return self.__nombre
 class cliente:
     def __init__(self, nombre, cantidadvuelos, estadoemergencia):
         self.__nombre = nombre
@@ -28,5 +14,18 @@ class asistente:
         self.codigoempleado = codigoempleado
     def getcodigoempleado(self):
         return self.__codigoempleado
-
-
+    
+class empleado:
+    def __init__(self, nombre,rut):
+        self.nombre = nombre
+        self.rut = rut
+    def getnombre(self):
+        return self.__nombre
+    def getrut(self):
+        return self.__rut
+class gerente:
+    def __init__(self,codigoempleado):
+        self.codigoempleado = codigoempleado
+    def getcodigoempleado(self):
+        return self.__codigoempleado
+    
