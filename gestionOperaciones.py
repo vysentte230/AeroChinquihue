@@ -39,3 +39,56 @@ class GestorPasajesEncomiendas:
         }
         self.pasajes = []
         self.encomiendas = []
+
+    def calcularTotal(self, montoBase: float, cantidadVuelos: int = 0, emergencia: bool = False) -> float:
+            if emergencia:
+                return 0.0
+            if cantidadVuelos > 10:
+                return montoBase * 0.90
+            return montoBase
+
+    def gestionarPasaje(
+        self,
+        pasajero: str,
+        nombreDestino: str,
+        asiento: int,
+        medioPago: str,
+        cantidadVuelos: int = 0,
+        emergencia: bool = False,
+    ) -> RegistroPasaje:
+        if nombreDestino not in self.destinos:
+            raise ValueError(f"Destino no válido: {nombreDestino}")
+        if any(p.destino.nombre == nombreDestino and p.asiento == asiento for p in self.pasajes):
+            raise ValueError(f"El asiento {asiento} ya está ocupado para {nombreDestino}.")
+
+        destino = self.destinos[nombreDestino]
+        total = self.calcularTotal(destino.precioPasaje, cantidadVuelos, emergencia)
+        registro = RegistroPasaje(pasajero, destino, asiento, total, medioPago)
+        self.pasajes.append(registro)
+        return registro
+
+    def gestionarEncomienda(
+        self,
+        remitente: str,
+        nombreDestino: str,
+        pesoKg: float,
+        medioPago: str,
+        cargaMaximaKg: float = 1800.0,
+        cantidadVuelos: int = 0,
+        emergencia: bool = False,
+    ) -> RegistroEncomienda:
+        if nombreDestino not in self.destinos:
+            raise ValueError(f"Destino no válido: {nombreDestino}")
+        if pesoKg <= 0:
+            raise ValueError("El peso debe ser mayor a 0 kg.")
+
+        cargaActual = sum(e.pesoKg for e in self.encomiendas if e.destino.nombre == nombreDestino)
+        if cargaActual + pesoKg > cargaMaximaKg:
+            raise ValueError("Se excede la capacidad máxima de carga disponible.")
+
+        destino = self.destinos[nombreDestino]
+        montoBase = pesoKg * destino.precioKg
+        total = self.calcularTotal(montoBase, cantidadVuelos, emergencia)
+        registro = RegistroEncomienda(remitente, destino, pesoKg, total, medioPago)
+        self.encomiendas.append(registro)
+        return registro
