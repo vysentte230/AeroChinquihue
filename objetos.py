@@ -40,9 +40,9 @@ class aerodromo:
 
     def getnombre(self):
         return self.__nombre
-    def obtenerpreciopasaje(self):
+    def getobtenerpreciopasaje(self):
         return self.__preciopasaje
-    def obtenerprecioencomienda(self):
+    def getobtenerprecioencomienda(self):
         return self.__precioporkg
 
 class asiento:
@@ -53,16 +53,16 @@ class asiento:
     def getnumero(self):
         return self.__numero
 
-    def estadisponible(self):
+    def getestadisponible(self):
         return not self.__ocupado
 
-    def ocupar(self):
+    def getocupar(self):
         if self.__ocupado:
             return False
         self.__ocupado = True
         return True
 
-    def desocupar(self):
+    def getdesocupar(self):
         self.__ocupado = False
 
 class avion:
@@ -70,3 +70,13 @@ class avion:
         self.__modelo = modelo
         self.__capacidadpasajeros = capacidadpasajeros
         self.__capacidadcarga = capacidadcarga
+        self.__asientos = asientos
+    def getmodelo(self):
+        return self.__modelo
+    def getcapacidadpasajeros(self):
+        return self.__capacidadpasajeros
+    def getcapacidadcarga(self):
+        return self.__capacidadcarga
+    def getasientos(self):
+        return self.__asientos
+
