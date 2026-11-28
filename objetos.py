@@ -4,31 +4,37 @@ class cliente:
         self.__cantidadvuelos = cantidadvuelos
         self.__estadoemergencia = estadoemergencia
     def getnombre(self):
-         return self.__nombre
+        return self.__nombre
     def getcantidadvuelos(self):
+        return self.__cantidadvuelos
          return self.__cantidadvuelos
     def estadoemergencia(self):
-         return self.__estadoemergencia
+        return self.__estadoemergencia
+    def setnombre(self, nombre):
+        self.__nombre = nombre
+    def setcantidadvuelos(self, cantidadvuelos):
+        self.__cantidadvuelos = cantidadvuelos
+    def setestadoemergencia(self, estadoemergencia):
+        self.__estadoemergencia = estadoemergencia
 
 class asistente:
     def __init__(self, codigoempleado):
-        self.codigoempleado = codigoempleado
+        self.__codigoempleado = codigoempleado
     def getcodigoempleado(self):
         return self.__codigoempleado
-    
 
 class empleado:
-    def __init__(self, nombre,rut):
-        self.nombre = nombre
-        self.rut = rut
+    def __init__(self, nombre, rut):
+        self.__nombre = nombre
+        self.__rut = rut
     def getnombre(self):
         return self.__nombre
     def getrut(self):
         return self.__rut
 
 class gerente:
-    def __init__(self,codigoempleado):
-        self.codigoempleado = codigoempleado
+    def __init__(self, codigoempleado):
+        self.__codigoempleado = codigoempleado
     def getcodigoempleado(self):
         return self.__codigoempleado
 
@@ -44,6 +50,12 @@ class aerodromo:
         return self.__preciopasaje
     def getobtenerprecioencomienda(self):
         return self.__precioporkg
+    def setnombre(self, nombre):
+        self.__nombre = nombre
+    def setpreciopasaje(self, preciopasaje):
+        self.__preciopasaje = preciopasaje
+    def setprecioporkg(self, precioporkg):
+        self.__precioporkg = precioporkg
 
 class asiento:
     def __init__(self, numero, ocupado= False):
@@ -70,6 +82,29 @@ class avion:
         self.__modelo = modelo
         self.__capacidadpasajeros = capacidadpasajeros
         self.__capacidadcarga = capacidadcarga
+        # Si no se entregan asientos, se crean según la capacidad del avión
+        if asientos is None:
+            self.__asientos = []
+            for i in range(capacidadpasajeros):
+                self.__asientos.append(asiento(i + 1))
+        else:
+            self.__asientos = asientos
+
+    def getmodelo(self):
+        return self.__modelo
+    def getcapacidadpasajeros(self):
+        return self.__capacidadpasajeros
+    def getcapacidadcarga(self):
+        return self.__capacidadcarga
+    def getasientos(self):
+        return self.__asientos
+
+    def asientosdisponibles(self):
+        disponibles = []
+        for a in self.__asientos:
+            if a.estadisponible():
+                disponibles.append(a)
+        return disponibles
         self.__asientos = asientos
     def getmodelo(self):
         return self.__modelo
