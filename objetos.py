@@ -7,7 +7,6 @@ class cliente:
         return self.__nombre
     def getcantidadvuelos(self):
         return self.__cantidadvuelos
-         return self.__cantidadvuelos
     def estadoemergencia(self):
         return self.__estadoemergencia
     def setnombre(self, nombre):

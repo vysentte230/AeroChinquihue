@@ -1,27 +1,42 @@
-from PyQt6 import QtWidgets
-
-contador = 67
-def llamada():
-    print(f"presionaste el boton {contador} veces")
-
-app = QtWidgets.QApplication([])
-
-#Logina inicio
-#un widget es la base de todo
-widget = QtWidgets.QWidget()
-caja = QtWidgets.QHBoxLayout(widget)
-#caja horizontal
-#caja = QtWidgets.QWidget()
-grid = QtWidgets.QGridLayout ( )
+import sys
+from PyQt6.QtWidgets import (
+    QApplication,
+    QWidget,
+    QGridLayout,
+    QLabel,
+    QLineEdit,
+    QCheckBox,
+    QSlider,
+    QRadioButton,
+)
 
 
+class VentanaFormulario(QWidget):
 
-widget.setFixedSize(400, 300)
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("Formulario")
+        grid = QGridLayout()
 
+        grid.addWidget(QLabel("Nombre:"), 0, 0)
+        grid.addWidget(QLineEdit(), 0, 1)
 
-# mostrar widget
-widget.show()
+        grid.addWidget(QLabel("Apellido:"), 1, 0)
+        grid.addWidget(QLineEdit(), 1, 1)
 
-#logica fin
+        grid.addWidget(QLabel("Correo:"), 2, 0)
+        grid.addWidget(QLineEdit(), 2, 1)
 
-app.exec()
+        grid.addWidget(QCheckBox("joder o eso osito fredy fas bear"),3, 0)
+        grid.addWidget(QLineEdit(), 2, 1)
+
+        grid.addWidget(QRadioButton(),4, 0)
+        
+
+        self.setLayout(grid)
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    ventana = VentanaFormulario()
+    ventana.show()
+    sys.exit(app.exec())
